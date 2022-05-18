@@ -16,19 +16,18 @@ def index(request):
         expirydate = request.POST['expirydate']
         cvv =  request.POST['cvv']
 
-        token = random.randbytes(15).hex()
-        paymentCode = PaymentToken.objects.create(user = request.user, token = token)       
+        token = random.randint(2000, 9000)
+        user = User.objects.get(pk=user)
+        paymentCode = PaymentToken.objects.create(user = user, token = token)       
         paymentCode.save()
-
-        return render(request, 'index.html', {'generated':True, 'show_token':paymentCode.token})
-    if request.method == "GET" and request.GET.get('token', None) is not None:
-        token = request.GET['token']
-        
+        show_token = PaymentToken.object.get(token)
+        return render(request, 'index.html', {'generated':True, 'show_token':show_token})
+    if request.method == "POST":
+        token = request.POST['token']
         if PaymentToken.objects.filter(token=token).exists():
             return render(request, "index.html", {"success": True, "token": token})
         else:
             return render(request, "index.html", {"success": False})
-    
     return render(request, "index.html")
 
 def about(request):

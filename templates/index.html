@@ -2,7 +2,7 @@
 
 <!-- Header Start -->
 <div class="container-fluid bg-primary px-0 px-md-5 mb-5 pt-2">
-	{% if user.is_authenticated %} {% if success is not None %} 
+	{% if user.is_authenticated %}
 	{% if not success %}
 	<div class="alert alert-danger" role="alert">
 		Error: Payment Token is not valid, Please try again!
@@ -11,7 +11,8 @@
 	<div class="alert alert-success" role="alert">
 		Success: Payment Token verified! Generate button is now active.
 	</div>
-	{% endif %} {% endif %} {% endif %}
+	{% endif %}
+	{% endif %}
 	<div class="row align-items-center px-3">
 		{% if user.is_authenticated %}
 		<div class="col-lg-6 text-center text-lg-left">
@@ -69,7 +70,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="" method="get">
+						<form action="" method="post">
 							{% csrf_token %}
 							<div class="modal-body">
 								<div class="control-group">
@@ -132,13 +133,19 @@
 
 <!-- About Start -->
 
-{% if user.is_authenticated %} {% if not generated %} {% else %}
-<div class="card" style="width: 18rem">
-	<div class="card-header text-success font-weight-bold">Here is your payment token.</div>
-	<div class="card-header">{{ show_token }}</div>
-</div>
+{% if user.is_authenticated %}
 
-{% endif %}
+{% if not generated %}
+
+{% else %}
+<div class="card" style="width: 18rem;">
+	<div class="card-header">
+	 {{ show_token }}
+	</div>
+	
+  </div>
+
+  {% endif %}
 
 <div class="container-fluid py-5">
 	<div class="container">
@@ -149,73 +156,67 @@
 						<br />
 						<form action="" method="post">
 							{% csrf_token%}
-							<p class="section-title pr-5">
-								<span class="pr-2">Payment Details</span>
-							</p>
-							<div class="row gx-3">
-								<div class="col-12">
-									<div class="d-flex flex-column">
-										<p class="text mb-1">Person Name</p>
-										<input
-											class="form-control mb-3"
-											type="text"
-											placeholder="Name"
-											name="person_name"
-										/>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="d-flex flex-column">
-										<p class="text mb-1">Card Number</p>
-										<input
-											class="form-control mb-3"
-											type="number"
-											placeholder="1234 5678 435678"
-											name="card_number"
-										/>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="d-flex flex-column">
-										<p class="text mb-1">Expiry</p>
-										<input
-											data-provide="datepicker"
-											data-date-format="mm/yyyy"
-											data-date-min-view-mode="months"
-											class="form-control mb-3"
-											placeholder="MM/YYYY"
-											name="expirydate"
-											autocomplete="cc-exp"
-										/>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="d-flex flex-column">
-										<p class="text mb-1">CVV/CVC</p>
-										<input
-											class="form-control mb-3 pt-2"
-											type="password"
-											placeholder="***"
-											name="cvv"
-										/>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="btn btn-primary mb-3">
-										<span class="ps-3">Pay $243</span>
-										<span class="fas fa-arrow-right"></span>
-									</div>
-								</div>
-								<div class="btn btn-primary mb-3">
-									<button
-										type="submit"
-										class="btn btn-primary"
-									>
-										Make Payment
-									</button>
+						<p class="section-title pr-5">
+							<span class="pr-2">Payment Details</span>
+						</p>
+						<div class="row gx-3">
+							<div class="col-12">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Person Name</p>
+									<input
+										class="form-control mb-3"
+										type="text"
+										placeholder="Name"
+										name = "person_name"
+									/>
 								</div>
 							</div>
-						</form>
+							<div class="col-12">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Card Number</p>
+									<input
+										class="form-control mb-3"
+										type="number"
+										placeholder="1234 5678 435678"
+										name="card_number"
+									/>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Expiry</p>
+									<input
+										class="form-control mb-3"
+										type="number"
+										placeholder="MM/YYYY"
+										name="expirydate"
+									/>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">CVV/CVC</p>
+									<input
+										class="form-control mb-3 pt-2"
+										type="password"
+										placeholder="***"
+										name="cvv"
+									/>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="btn btn-primary mb-3">
+									<span class="ps-3">Pay $243</span>
+									<span class="fas fa-arrow-right"></span>
+								</div>
+							</div>
+							<div class="btn btn-primary mb-3">
+								<button type="submit" class="btn btn-primary">
+									Make Payment
+								</button>
+							</div>
+						</div>
+					</form>
 					</div>
 				</div>
 			</div>
