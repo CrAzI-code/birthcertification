@@ -70,7 +70,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="" method="post">
+						<form action="" method="get">
 							{% csrf_token %}
 							<div class="modal-body">
 								<div class="control-group">
@@ -155,7 +155,7 @@
 					<div class="card px-4">
 						<br />
 						<form action="" method="post">
-							{% csrf_token%}
+							{% csrf_token %}
 						<p class="section-title pr-5">
 							<span class="pr-2">Payment Details</span>
 						</p>
