@@ -103,8 +103,7 @@ def generate(request):
         return render(request, "generate_certificate.html")
 
 def user_data(request):
-    user_info = PersonalData.objects.filter(user=request.user)
-    print(request.user)
+    user_info = PersonalData.objects.get(user=request.user)
 
     return render(request, 'user_data.html',{"user_info":user_info})
 
