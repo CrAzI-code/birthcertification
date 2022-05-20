@@ -106,7 +106,7 @@ def user_data(request):
     user_info = PersonalData.objects.filter(user=request.user)
     print(request.user)
 
-    return render(request, 'user_data.html',{"user_info":user_info})
+    return render(request, 'user_data.html',{"user_info":user_info })
 
 def logout(request):
     auth.logout(request)
